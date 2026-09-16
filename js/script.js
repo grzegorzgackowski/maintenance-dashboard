@@ -94,3 +94,30 @@ function updateStatistics() {
 }
 
 updateStatistics();
+
+const issueForm = document.querySelector("#issue-form");
+
+issueForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const apartment = document.querySelector("#apartment").value;
+    const category = document.querySelector("#category").value;
+    const description = document.querySelector("#description").value;
+    const date = document.querySelector("#date").value;
+    const priority = document.querySelector("#priority").value;
+
+    const newIssue = {
+        id: Date.now(),
+        apartment: apartment,
+        category: category,
+        description: description,
+        date: date,
+        priority: priority,
+        status: "Pending"
+    };
+
+    issues.push(newIssue);
+    renderIssues();
+updateStatistics();
+issueForm.reset();
+});
