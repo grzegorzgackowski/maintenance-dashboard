@@ -77,3 +77,20 @@ function renderIssues() {
 }
 
 renderIssues();
+
+function updateStatistics() {
+    const totalIssues = document.querySelector("#total-issues");
+    const pendingIssues = document.querySelector("#pending-issues");
+    const inProgressIssues = document.querySelector("#in-progress-issues");
+    const resolvedIssues = document.querySelector("#resolved-issues");
+
+    totalIssues.textContent = issues.length;
+
+    pendingIssues.textContent = issues.filter(issue => issue.status === "Pending").length;
+
+    inProgressIssues.textContent = issues.filter(issue => issue.status === "In Progress").length;
+
+    resolvedIssues.textContent = issues.filter(issue => issue.status === "Resolved").length;
+}
+
+updateStatistics();
