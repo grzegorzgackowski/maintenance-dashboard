@@ -1,4 +1,4 @@
-const issues = [
+let issues = JSON.parse(localStorage.getItem("issues")) || [
     {
         id: 1,
         apartment: "Málaga Center 01",
@@ -99,13 +99,13 @@ function renderIssues() {
 
 renderIssues();
 
-issuesList.addEventListener("click", function(event) {
+issuesList.addEventListener("click", function (event) {
 
     if (event.target.classList.contains("status-btn")) {
 
         const issueId = Number(event.target.dataset.id);
 
-        const issue = issues.find(function(issue) {
+        const issue = issues.find(function (issue) {
             return issue.id === issueId;
         });
 
@@ -114,6 +114,8 @@ issuesList.addEventListener("click", function(event) {
         } else if (issue.status === "In Progress") {
             issue.status = "Resolved";
         }
+
+        localStorage.setItem("issues", JSON.stringify(issues));
 
         renderIssues();
         updateStatistics();
@@ -160,7 +162,11 @@ issueForm.addEventListener("submit", function (event) {
     };
 
     issues.push(newIssue);
+
+    localStorage.setItem("issues", JSON.stringify(issues));
+
     renderIssues();
-updateStatistics();
-issueForm.reset();
+    updateStatistics();
+
+    issueForm.reset();
 });
