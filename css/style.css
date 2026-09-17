@@ -278,6 +278,23 @@ body {
     justify-self: start;
 }
 
+/* Status button */
+
+.status-btn {
+    border: none;
+    background-color: blue;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.status-btn:hover {
+    background-color: darkblue;
+}
+
 /* responsive */
 
 @media (max-width: 800px) {

@@ -34,6 +34,25 @@ function renderIssues() {
     issuesList.innerHTML = "";
 
     issues.forEach(issue => {
+
+        let statusButton = "";
+
+        if (issue.status !== "Resolved") {
+            let buttonText = "";
+
+            if (issue.status === "Pending") {
+                buttonText = "Start Progress";
+            } else if (issue.status === "In Progress") {
+                buttonText = "Resolve";
+            }
+
+            statusButton = `
+                <button class="status-btn" data-id="${issue.id}">
+                    ${buttonText}
+                </button>
+            `;
+        }
+
         const issueCard = document.createElement("article");
 
         issueCard.classList.add("issue-card");
@@ -67,6 +86,8 @@ function renderIssues() {
                         ${issue.status}
                     </span>
 
+                    ${statusButton}
+
                 </div>
 
             </div>
@@ -77,6 +98,28 @@ function renderIssues() {
 }
 
 renderIssues();
+
+issuesList.addEventListener("click", function(event) {
+
+    if (event.target.classList.contains("status-btn")) {
+
+        const issueId = Number(event.target.dataset.id);
+
+        const issue = issues.find(function(issue) {
+            return issue.id === issueId;
+        });
+
+        if (issue.status === "Pending") {
+            issue.status = "In Progress";
+        } else if (issue.status === "In Progress") {
+            issue.status = "Resolved";
+        }
+
+        renderIssues();
+        updateStatistics();
+    }
+
+});
 
 function updateStatistics() {
     const totalIssues = document.querySelector("#total-issues");
