@@ -30,10 +30,10 @@ let issues = JSON.parse(localStorage.getItem("issues")) || [
 
 const issuesList = document.querySelector(".issues-list");
 
-function renderIssues() {
+function renderIssues(issuesToRender = issues) {
     issuesList.innerHTML = "";
 
-    issues.forEach(issue => {
+    issuesToRender.forEach(issue => {
 
         let statusButton = "";
 
@@ -141,6 +141,34 @@ function updateStatistics() {
 updateStatistics();
 
 const issueForm = document.querySelector("#issue-form");
+const apartmentFilter = document.querySelector("#apartment-filter");
+const statusFilter = document.querySelector("#status-filter");
+const priorityFilter = document.querySelector("#priority-filter");
+
+function filterIssues() {
+    const selectedApartment = apartmentFilter.value;
+    const selectedStatus = statusFilter.value;
+    const selectedPriority = priorityFilter.value;
+
+    const filteredIssues = issues.filter(function(issue) {
+
+        if (selectedApartment !== "" && issue.apartment !== selectedApartment) {
+            return false;
+        }
+
+        if (selectedStatus !== "" && issue.status !== selectedStatus) {
+            return false;
+        }
+
+        if (selectedPriority !== "" && issue.priority !== selectedPriority) {
+            return false;
+        }
+
+        return true;
+    });
+
+    renderIssues(filteredIssues);
+}
 
 issueForm.addEventListener("submit", function (event) {
     event.preventDefault();
@@ -170,3 +198,28 @@ issueForm.addEventListener("submit", function (event) {
 
     issueForm.reset();
 });
+
+apartmentFilter.addEventListener("change", filterIssues);
+statusFilter.addEventListener("change", filterIssues);
+priorityFilter.addEventListener("change", filterIssues);
+
+function populateApartmentFilter() {
+    const apartments = [];
+
+    issues.forEach(function(issue) {
+        if (!apartments.includes(issue.apartment)) {
+            apartments.push(issue.apartment);
+        }
+    });
+
+    apartments.forEach(function(apartment) {
+        const option = document.createElement("option");
+
+        option.value = apartment;
+        option.textContent = apartment;
+
+        apartmentFilter.appendChild(option);
+    });
+}
+
+populateApartmentFilter();

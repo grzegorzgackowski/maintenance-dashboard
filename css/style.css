@@ -295,6 +295,36 @@ body {
     background-color: darkblue;
 }
 
+/* Filters */
+
+.filters {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.filter-group label {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.filter-group select {
+    width: 100%;
+    border: 1px solid lightgray;
+    border-radius: 8px;
+    padding: 10px 12px;
+    background-color: white;
+    font-family: inherit;
+    font-size: 14px;
+}
+
 /* responsive */
 
 @media (max-width: 800px) {

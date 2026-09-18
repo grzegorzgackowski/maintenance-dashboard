@@ -96,7 +96,36 @@
             <h2>Maintenance Issues</h2>
             <p>Overview of current apartment issues</p>
           </div>
+          <div class="filters">
 
+            <div class="filter-group">
+              <label for="apartment-filter">Apartment</label>
+              <select id="apartment-filter">
+                <option value>All apartments</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label for="status-filter">Status</label>
+              <select id="status-filter">
+                <option value>All statuses</option>
+                <option value="Pending">Pending</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Resolved">Resolved</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label for="priority-filter">Priority</label>
+              <select id="priority-filter">
+                <option value>All priorities</option>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+              </select>
+            </div>
+
+          </div>
           <button class="add-issue-btn">
             + Add Issue
           </button>
