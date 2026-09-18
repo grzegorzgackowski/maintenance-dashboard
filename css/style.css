@@ -232,7 +232,7 @@ body {
     margin-bottom: 6px;
 }
 
-.issue-form-section > p {
+.issue-form-section>p {
     color: gray;
     font-size: 14px;
     margin-bottom: 24px;
@@ -364,6 +364,17 @@ body {
 
     .issues-section {
         padding: 20px;
+    }
+    #issue-form {
+        grid-template-columns: 1fr;
+    }
+
+    .form-group:nth-child(3) {
+        grid-column: auto;
+    }
+
+    .filters {
+        grid-template-columns: 1fr;
     }
 
     .section-header {
